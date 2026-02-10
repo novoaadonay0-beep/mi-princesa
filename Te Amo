@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tú eres mi rosa 🌹</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        min-height: 100vh;
+        background: radial-gradient(circle at top, #ff5fa2, #2b0016);
+        font-family: 'Segoe UI', system-ui, sans-serif;
+        color: white;
+        overflow: hidden;
+    }
+
+    .container {
+        position: relative;
+        z-index: 2;
+        padding: 24px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+    }
+
+    .card {
+        width: 100%;
+        max-width: 420px;
+        background: rgba(0,0,0,0.35);
+        backdrop-filter: blur(10px);
+        border-radius: 24px;
+        padding: 24px;
+        text-align: center;
+        box-shadow: 0 0 30px rgba(0,0,0,0.5);
+    }
+
+    h1 {
+        font-size: 2rem;
+        margin-bottom: 12px;
+    }
+
+    .intro {
+        font-size: 1.05rem;
+        line-height: 1.5;
+        opacity: 0.95;
+    }
+
+    .timer {
+        margin: 22px 0;
+        padding: 16px;
+        border-radius: 16px;
+        background: rgba(255,255,255,0.08);
+        font-size: 1.3rem;
+        line-height: 1.6;
+    }
+
+    .message {
+        margin-top: 20px;
+        font-size: 1.25rem;
+        line-height: 1.5;
+        opacity: 0;
+        transition: opacity 1.2s ease;
+    }
+
+    .show {
+        opacity: 1;
+    }
+
+    iframe {
+        margin-top: 18px;
+        width: 100%;
+        height: 80px;
+        border-radius: 14px;
+    }
+
+    /* 💗 CORAZONES */
+    .heart {
+        position: fixed;
+        bottom: -20px;
+        font-size: 18px;
+        animation: floatUp linear infinite;
+        opacity: 0.8;
+    }
+
+    @keyframes floatUp {
+        from {
+            transform: translateY(0) scale(1);
+            opacity: 0.9;
+        }
+        to {
+            transform: translateY(-110vh) scale(1.4);
+            opacity: 0;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <div class="card">
+        <h1>Para ti, mi amor 🌹</h1>
+
+        <p class="intro">
+            Aunque a veces el mundo diga<br>
+            <em>como si no importara</em>,<br>
+            yo sigo acá… eligiéndote.
+        </p>
+
+        <div class="timer" id="timer"></div>
+
+        <div class="message" id="loveMessage">
+            💗 Tú eres mi rosa,<br>
+            y no me importan tus espinas.<br>
+            Seguiré apoyándote y amándote<br>
+            todos los días de mi vida. 💗
+        </div>
+
+        <!-- 🎵 CANCIÓN (vibra Emilia & Duki) -->
+        <iframe
+            src="https://www.youtube.com/embed/9Kx8Z7G9p8E?autoplay=1&mute=1"
+            frameborder="0"
+            allow="autoplay; encrypted-media"
+            allowfullscreen>
+        </iframe>
+        <p style="font-size:0.75rem; opacity:0.75;">
+            toca para escuchar 🔊
+        </p>
+    </div>
+</div>
+
+<script>
+    // 🗓️ FECHA DE INICIO (AJÚSTALA SI QUIERES)
+    const startDate = new Date("2019-02-10T00:00:00");
+
+    const timerEl = document.getElementById("timer");
+    const messageEl = document.getElementById("loveMessage");
+
+    function updateTimer() {
+        const now = new Date();
+        let diff = now - startDate;
+
+        const seconds = Math.floor(diff / 1000) % 60;
+        const minutes = Math.floor(diff / (1000 * 60)) % 60;
+        const hours   = Math.floor(diff / (1000 * 60 * 60)) % 24;
+        const days    = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+        timerEl.innerHTML = `
+            ⏳<br>
+            ${days} días<br>
+            ${hours} horas ${minutes} minutos ${seconds} segundos
+        `;
+    }
+
+    setInterval(updateTimer, 1000);
+    updateTimer();
+
+    // 💌 MENSAJE 3 VECES AL DÍA
+    function showLoveMessage() {
+        messageEl.classList.add("show");
+        setTimeout(() => {
+            messageEl.classList.remove("show");
+        }, 60000);
+    }
+
+    showLoveMessage();
+    setInterval(showLoveMessage, 8 * 60 * 60 * 1000);
+
+    // 💗 CORAZONES ANIMADOS
+    function createHeart() {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerText = "💗";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = (5 + Math.random() * 5) + "s";
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+            heart.remove();
+        }, 10000);
+    }
+
+    setInterval(createHeart, 700);
+</script>
+
+</body>
+</html>
